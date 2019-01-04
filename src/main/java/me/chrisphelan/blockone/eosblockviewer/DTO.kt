@@ -17,3 +17,8 @@ class TransactionDto {
 
 @JsonClass(generateAdapter = true)
 class BlockIdDto(val block_num_or_id: String)
+
+@JsonClass(generateAdapter = true)
+class ChainInfoDto {
+    lateinit var head_block_id: String
+}

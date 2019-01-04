@@ -29,6 +29,7 @@ class BlockListAdapter(private var items: List<BlockData>) : RecyclerView.Adapte
     inner class BlockListingHolder(private val blockListingView: View) :
             RecyclerView.ViewHolder(blockListingView) {
 
+        // This could be cleaned up using Android data binding framework
         val timestampView: TextView = blockListingView.findViewById( R.id.timestampView )
         val producerView: TextView = blockListingView.findViewById( R.id.producerView )
 

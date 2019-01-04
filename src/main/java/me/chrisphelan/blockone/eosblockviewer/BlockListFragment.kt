@@ -1,5 +1,6 @@
 package me.chrisphelan.blockone.eosblockviewer
 
+import android.opengl.Visibility
 import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -13,30 +14,22 @@ import kotlinx.coroutines.*
 
 class BlockListFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate( R.layout.fragment_block_list, container, false)
 
-        val fragment = inflater.inflate( R.layout.fragment_block_list, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        setUpBlockListView(fragment.findViewById(R.id.blockListView))
+        setUpBlockListView(blockListView)
 
-        GlobalScope.launch {
-            Log.d( LOG_TAG, "In network coroutine (test version)")
-            val fetchedBlock: BlockDto? = eosGetBlock.getBlock( BlockIdDto("35520468"))
-                .execute().body()
-            val fauxBlockList: List<BlockData> = listOf( fetchedBlock?.let{ BlockData( it ) }
-                ?: BlockData( "Never", "No One", "Nothing", emptyList()))
+        loadButton.setOnClickListener { ViewModel.onLoadButtonClick() }
 
-            withContext(MainScope().coroutineContext) {
-                (blockListView.adapter as BlockListAdapter).setBlocks(fauxBlockList)
-            }
-
-        }
-
-        return fragment
     }
 
     private fun setUpBlockListView(view: RecyclerView) = with(view) {
-        adapter = BlockListAdapter(dummyData())
+        val blockListAdapter = BlockListAdapter(emptyList())
+        adapter = blockListAdapter
+        ViewModel.updateBlockListView = blockListAdapter::setBlocks
         layoutManager = LinearLayoutManager( this@BlockListFragment.context)
         setHasFixedSize(true)
     }

@@ -1,5 +1,9 @@
 package me.chrisphelan.blockone.eosblockviewer
 
+var HeadBlockId: String? = null
+
+val BlockList: MutableList<BlockData> = mutableListOf()
+
 data class BlockData(
     val timestamp: String, val producer: String, val previous: String, val transactions: List<TransactionData>) {
     constructor( dto: BlockDto ) : this( dto.timestamp, dto.producer, dto.previous,
