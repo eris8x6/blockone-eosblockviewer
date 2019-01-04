@@ -1,5 +1,7 @@
 package me.chrisphelan.blockone.eosblockviewer
 
+import android.app.Activity
+import android.app.Application
 import android.support.v7.widget.RecyclerView
 import android.text.Layout
 import android.view.LayoutInflater
@@ -8,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.item_block_listing.*
 
-class BlockListAdapter(private var items: List<BlockData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BlockListAdapter(private var items: List<BlockData>, private var itemClickHandler: (BlockData) -> Unit)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_block_listing, parent, false)
         return BlockListingHolder(view)
@@ -36,6 +40,7 @@ class BlockListAdapter(private var items: List<BlockData>) : RecyclerView.Adapte
         fun bind(block: BlockData) {
             timestampView.text = block.timestamp
             producerView.text = block.producer
+            blockListingView.setOnClickListener { itemClickHandler(block) }
         }
     }
 }

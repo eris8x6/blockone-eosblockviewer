@@ -5,10 +5,10 @@ var HeadBlockId: String? = null
 val BlockList: MutableList<BlockData> = mutableListOf()
 
 data class BlockData(
-    val timestamp: String, val producer: String, val previous: String, val transactions: List<TransactionData>) {
-    constructor( dto: BlockDto ) : this( dto.timestamp, dto.producer, dto.previous,
-        dto.transactions.map{ TransactionData( it.trx.let { if (it is String) it else "Complex" } ) } )
+    val timestamp: String, val producer: String, val previous: String,
+    val signature: String, val txn_count: Int, val raw: String) {
+
+    constructor( dto: BlockDto, raw: String )
+            : this(dto.timestamp, dto.producer, dto.previous, dto.producer_signature, dto.transactions.size, raw)
 
 }
-
-data class TransactionData(val trxId: String)

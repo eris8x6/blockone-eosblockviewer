@@ -9,7 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_block_list.*
 
-class BlockListFragment : Fragment() {
+class BlockListFragment( val blockClickHandler: (BlockData) -> Unit ) : Fragment() {
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate( R.layout.fragment_block_list, container, false)
@@ -24,7 +25,7 @@ class BlockListFragment : Fragment() {
     }
 
     private fun setUpBlockListView(view: RecyclerView) = with(view) {
-        val blockListAdapter = BlockListAdapter(emptyList())
+        val blockListAdapter = BlockListAdapter(emptyList(), blockClickHandler)
         adapter = blockListAdapter
         ViewModel.updateBlockListView = blockListAdapter::setBlocks
         layoutManager = LinearLayoutManager( this@BlockListFragment.context)

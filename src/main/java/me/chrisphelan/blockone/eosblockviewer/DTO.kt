@@ -7,12 +7,8 @@ class BlockDto {
     lateinit var timestamp: String
     lateinit var producer: String
     lateinit var previous: String
-    lateinit var transactions: List<TransactionDto>
-}
-
-@JsonClass(generateAdapter = true)
-class TransactionDto {
-    lateinit var trx: Any
+    lateinit var producer_signature: String
+    lateinit var transactions: List<Any>
 }
 
 @JsonClass(generateAdapter = true)

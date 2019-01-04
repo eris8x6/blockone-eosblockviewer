@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EOSBlockViewer</string>
+    <string name="title_raw_toggle">Show Raw Data</string>
+</resources>

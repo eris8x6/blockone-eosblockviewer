@@ -6,17 +6,19 @@ import kotlinx.coroutines.*
 object DataLoader {
 
     fun loadChainInfo() {
-        GlobalScope.launch {
             val chainInfo = eosGetBlock.getChainInfo().execute().body()
-
             HeadBlockId = chainInfo?.head_block_id
-        }
     }
 
     fun loadBlock(blockId: String) {
         GlobalScope.launch {
-            val blockDto = eosGetBlock.getBlock( BlockIdDto(blockId) ).execute().body()
-            blockDto?.let{ BlockList.add( BlockData(it) )}
+            BlockIdDto(blockId).let {
+                val blockDto = eosGetBlock.getBlock( it ).execute().body()
+                val blockRaw = eosGetBlock.getRawBlock( it ).execute().body()
+                if (blockDto != null && blockRaw != null) {
+                    BlockList.add( BlockData( blockDto, blockRaw.string() ))
+                }
+            }
 
         }
     }
