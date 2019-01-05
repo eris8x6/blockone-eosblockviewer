@@ -13,6 +13,7 @@ data class BlockData(
     val raw: String) {
 
     constructor( dto: BlockDto, raw: String )
-            : this(dto.timestamp, dto.producer, dto.previous, dto.producer_signature, dto.transactions.size, raw)
+            : this(dto.timestamp, dto.producer, dto.previous, dto.producer_signature,
+                dto.transactions.size, raw)
 
 }
