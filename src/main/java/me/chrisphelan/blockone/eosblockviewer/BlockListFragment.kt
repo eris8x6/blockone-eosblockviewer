@@ -20,14 +20,14 @@ class BlockListFragment( val blockClickHandler: (BlockData) -> Unit ) : Fragment
 
         setUpBlockListView(blockListView)
 
-        loadButton.setOnClickListener { ViewModel.onLoadButtonClick() }
+        loadButton.setOnClickListener { BlockListController.onLoadButtonClick() }
 
     }
 
     private fun setUpBlockListView(view: RecyclerView) = with(view) {
         val blockListAdapter = BlockListAdapter(emptyList(), blockClickHandler)
         adapter = blockListAdapter
-        ViewModel.updateBlockListView = blockListAdapter::setBlocks
+        BlockListController.updateBlockListView = blockListAdapter::setBlocks
         layoutManager = LinearLayoutManager( this@BlockListFragment.context)
         setHasFixedSize(true)
     }
