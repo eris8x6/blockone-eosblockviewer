@@ -3,6 +3,7 @@ package me.chrisphelan.blockone.eosblockviewer
 import android.databinding.DataBindingUtil
 import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,8 @@ class BlockDetailFragment() : Fragment() {
         raw_toggle_switch.setOnCheckedChangeListener { buttonView, isChecked: Boolean ->
             raw_data_view.visibility = if (isChecked) View.VISIBLE else View.INVISIBLE
         }
+
+        raw_data_view.movementMethod = ScrollingMovementMethod()
 
     }
 
