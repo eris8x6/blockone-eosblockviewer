@@ -41,7 +41,7 @@ object ViewModel {
         get() = if (blockCount > 0) BlockList.last().previous else HeadBlockId
 
     var isLoading = false
-        set(value: Boolean) {
+        set(value) {
             field = value
 
         }

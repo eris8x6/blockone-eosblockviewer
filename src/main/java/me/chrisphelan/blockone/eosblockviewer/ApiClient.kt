@@ -13,22 +13,13 @@ private const val BASE_URL = "https://api.eosnewyork.io/v1/"
 
 val eosGetBlock: EosGetBlock by lazy { eosClient.create(EosGetBlock::class.java) }
 
-//val eosGetRawBlock: EosRawBlock by lazy { rawClient.create(EosRawBlock::class.java) }
-
 private val eosClient by lazy { buildClient() }
-
-//private val rawClient by lazy { buildRawClient() }
 
 private fun buildClient(): Retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .client(buildHttpClient())
     .addConverterFactory(MoshiConverterFactory.create())
     .build()
-
-//private fun buildRawClient(): Retrofit = Retrofit.Builder()
-//    .baseUrl(BASE_URL)
-//    .client(buildHttpClient())
-//    .build()
 
 private fun buildHttpClient(): OkHttpClient = OkHttpClient.Builder()
     .connectTimeout(15, TimeUnit.SECONDS)
@@ -45,8 +36,3 @@ interface EosGetBlock {
     @POST("chain/get_info")
     fun getChainInfo(): Call<ChainInfoDto>
 }
-
-//interface EosRawBlock {
-//    @POST( "chain/get_block")
-//    fun getRawBlock(@Body blockIdDto: BlockIdDto): Call<ResponseBody>
-//}
