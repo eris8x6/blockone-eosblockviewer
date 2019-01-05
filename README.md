@@ -2,6 +2,8 @@
 Block.One Android Developer Interview Take home Test 
 Task 1: Android Application to pull the most recent blocks (Chris Phelan solution)
 
+Screen shots 1-5 are in the sampledata folder at the top level of the git repository.
+
 Functional Criteria:
 
 App has a button [visible in screen shot 1, immediately after starting app] which when clicked will display a list of the 20 most recent blocks [visible in screen shot 2, about 10 seconds after clicking button].  The list is scrollable, as 20 listings will not fit on the screen. Each block is denoted by its producer and timestamp (selected as the most human readable identifiers).
