@@ -21,7 +21,7 @@ class BlockViewerActivity : AppCompatActivity() {
 
         supportFragmentManager.let{
             if (it.findFragmentById(R.id.fragment_container) == null) {
-                listFrag = BlockListFragment(::navToDetail)
+                listFrag = BlockListFragment()
                 it.beginTransaction().add(R.id.fragment_container, listFrag ).commit()
             }
         }
